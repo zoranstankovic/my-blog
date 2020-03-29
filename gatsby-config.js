@@ -6,4 +6,10 @@
 
 module.exports = {
   /* Your site config here */
+  siteMetadata: {
+    title: "Zoran Stankovic",
+    description:
+      "A personal blog about programming, book reviews, and much more!",
+  },
+  plugins: [`gatsby-plugin-react-helmet`],
 }
