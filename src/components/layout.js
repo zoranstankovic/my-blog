@@ -1,12 +1,14 @@
-import React, { Fragment } from "react"
-import Helmet from "react-helmet"
-import Header from "../components/header"
-import useSiteMetadata from "../hooks/use-stiemetadata"
+import React from "react";
+
+import "../components/styles.scss";
+import Helmet from "react-helmet";
+import Header from "../components/header";
+import useSiteMetadata from "../hooks/use-stiemetadata";
 
 const Layout = ({ children }) => {
-  const { title, description } = useSiteMetadata()
+  const { title, description } = useSiteMetadata();
   return (
-    <Fragment>
+    <>
       <Helmet>
         <html lang="en" />
         <title>{title}</title>
@@ -14,8 +16,8 @@ const Layout = ({ children }) => {
       </Helmet>
       <Header />
       <main>{children}</main>
-    </Fragment>
-  )
-}
+    </>
+  );
+};
 
-export default Layout
+export default Layout;
