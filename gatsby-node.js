@@ -1,39 +1,32 @@
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const result = await graphql(`
     {
-      posts: allFile(
-        filter: { relativePath: { glob: "posts/**/*.{md,mdx}" } }
-        sort: { fields: relativePath, order: DESC }
-      ) {
+      allMdx {
         nodes {
-          id
-          childMdx {
-            frontmatter {
-              title
-              publish
-              slug
-            }
+          frontmatter {
+            slug
+            publish
           }
         }
       }
     }
-  `)
+  `);
 
   if (result.errors) {
-    reporter.panic("failed to create posts", result.errors)
+    reporter.panic("failed to create posts", result.errors);
   }
 
-  const posts = result.data.posts.nodes.filter(
-    post => post.childMdx.frontmatter.publish !== false
-  )
+  const posts = result.data.allMdx.nodes.filter(
+    post => post.frontmatter.publish !== false
+  );
 
   posts.forEach(post => {
     actions.createPage({
-      path: post.childMdx.frontmatter.slug,
+      path: post.frontmatter.slug,
       component: require.resolve("./src/templates/post.js"),
       context: {
-        slug: post.childMdx.frontmatter.slug,
+        slug: post.frontmatter.slug,
       },
-    })
-  })
-}
+    });
+  });
+};

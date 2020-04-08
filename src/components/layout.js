@@ -15,7 +15,11 @@ const Layout = ({ children }) => {
         <meta name="description" content={description} />
       </Helmet>
       <Header />
-      <main>{children}</main>
+      <section className="section">
+        <div className="container grid">
+          <main>{children}</main>
+        </div>
+      </section>
     </>
   );
 };
