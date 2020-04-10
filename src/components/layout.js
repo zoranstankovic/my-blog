@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
       <Header />
       <section className="section">
         <div className="container grid">
-          <main>{children}</main>
+          <div className="content">{children}</div>
         </div>
       </section>
     </>

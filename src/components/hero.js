@@ -14,13 +14,12 @@ const Hero = () => {
       }
     }
   `);
-  console.log(image);
   return (
     <section className="section is-paddingless-horizontal">
       <div className="container grid">
         <article className="media center">
-          <figure className="media-left">
-            <figure className="image is-128x128">
+          <figure className="media-left is-marginless">
+            <figure className="image is-128x128" style={{ marginLeft: "0" }}>
               <Img
                 fixed={image.sharp.fixed}
                 alt="Zoran Stankovic"
@@ -32,8 +31,9 @@ const Hero = () => {
             <div className="content is-medium">
               <h1>Hi! I'm Zoran</h1>
               <p className>
-                I am a web developer and I am in love with learing new things,
-                the best ways to learn them, and how the brain works.
+                I am a web developer, and I am in love with learning new things,
+                the best ways to learn them. Also, I love psychology and how the
+                brain works. Huge Corgi lover.
               </p>
             </div>
           </div>
