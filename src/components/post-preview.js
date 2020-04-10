@@ -18,7 +18,7 @@ const PostPreview = ({ post }) => (
         <footer className="has-text-grey">
           <div className="is-size-6">
             <span>
-              Published <time>25 December 2019</time>
+              Published <time>{post.date}</time>
             </span>{" "}
             , <span>reading time need</span>
           </div>
