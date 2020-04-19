@@ -5,7 +5,7 @@ const Social = () => {
   return (
     <div className="social-icons">
       <a
-        href="https://twitter.com"
+        href="https://twitter.com/RyunosukeZoran"
         className="social-icon"
         target="_blank"
         rel="noopener noreferrer"
@@ -13,7 +13,7 @@ const Social = () => {
         <FaTwitter />
       </a>
       <a
-        href="https://github.com"
+        href="https://github.com/zoranstankovic"
         className="social-icon"
         target="_blank"
         rel="noopener noreferrer"
@@ -21,7 +21,7 @@ const Social = () => {
         <FaGithub />
       </a>
       <a
-        href="https://www.linkedin.com/in"
+        href="https://www.linkedin.com/in/zoran-stankovic-40748061/"
         className="social-icon"
         target="_blank"
         rel="noopener noreferrer"
