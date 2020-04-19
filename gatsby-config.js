@@ -22,7 +22,10 @@ module.exports = {
         defaultLayouts: {
           default: require.resolve("./src/components/layout.js"),
         },
-        gatsbyRemarkPlugins: [{ resolve: "gatsby-remark-images" }],
+        gatsbyRemarkPlugins: [
+          { resolve: "gatsby-remark-images" },
+          `gatsby-remark-prismjs`,
+        ],
       },
     },
     {
@@ -37,6 +40,25 @@ module.exports = {
       options: {
         name: "images",
         path: "images",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Playfair Display`,
+            variants: [`400`, `700`],
+          },
+          {
+            family: `Roboto`,
+            variants: [`300`, `400`, `700`],
+          },
+          {
+            family: `Anonymous Pro`,
+            variants: [`400`],
+          },
+        ],
       },
     },
   ],

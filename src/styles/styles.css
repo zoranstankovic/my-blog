@@ -1,0 +1,292 @@
+:root {
+  --font-primary: "Playfair Display", serif;
+  --font-secondary: "Roboto", sans-serif;
+  --font-mono: "Anonymous Pro", monospace;
+  --bg-color: #0a192f;
+  --accent-color: #64ffda;
+  --dark-color: #000007;
+  --light-color: #ccd6f6;
+}
+
+html,
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--bg-color);
+  color: white;
+  font-weight: 300;
+  height: 100%;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* =================
+Typography
+================= */
+h1,
+h2,
+h3 {
+  font-family: var(--font-primary);
+  margin-top: 0;
+  color: var(--accent-color);
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+.site-title-link {
+  text-decoration: none;
+  color: white;
+  font-size: 2rem;
+  font-family: var(--font-primary);
+}
+
+.nav-item-link {
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+}
+
+.nav-item-link:hover,
+.nav-item-link:focus {
+  color: var(--accent-color);
+}
+
+a {
+  color: var(--accent-color);
+}
+
+strong {
+  font-weight: 400;
+}
+
+blockquote {
+  border-left: 2px solid var(--accent-color);
+  margin: 0;
+  padding: 0 1em 0 2em;
+}
+
+/* =================
+Layout
+================= */
+.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.container-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content {
+  flex: 1 0 auto;
+  margin-bottom: 2em;
+}
+
+header {
+  text-align: center;
+  margin: 2em 0;
+}
+
+footer {
+  text-align: center;
+  background-color: var(--dark-color);
+  padding: 1em 0;
+  flex-shrink: 0;
+}
+
+/* =================
+Navigation
+================= */
+.nav-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.current-page {
+  border-bottom: 1px solid var(--accent-color);
+}
+
+/* intro */
+.intro {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.intro-title {
+  color: var(--accent-color);
+}
+
+.intro-body {
+  font-weight: 400;
+  font-size: 1.125rem;
+}
+
+.social-icon {
+  margin-left: 1em;
+  color: white;
+}
+
+.social-icon:focus,
+.social-icon:hover {
+  color: var(--accent-color);
+}
+
+.social-icon:first-child {
+  margin-left: 0;
+}
+
+/* articles */
+.latest-post-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
+  align-items: center;
+}
+
+.latest-post-header h2 {
+  margin-bottom: 0;
+}
+
+.all-articles-link {
+  color: var(--accent-color);
+  font-family: var(--font-primary);
+}
+
+.article-latest {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
+}
+
+.article-title {
+  font-weight: 400;
+  color: var(--accent-color);
+  font-size: 1.25rem;
+  font-family: var(--font-primary);
+  text-decoration: none;
+}
+
+.article-image {
+  display: none;
+}
+
+.article-info {
+  color: var(--light-color);
+  font-size: 0.875rem;
+  margin-top: 0;
+}
+
+.article-read-more {
+  color: var(--accent-color);
+  font-size: 0.875rem;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
+  align-items: center;
+}
+
+.about-image {
+  order: -1;
+}
+
+/* Code */
+code[class*="language-"],
+pre[class*="language-"] {
+  font-family: var(--font-mono);
+}
+
+.gatsby-highlight-code-line {
+  background-color: #feb;
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  border-left: 0.25em solid #f99;
+}
+
+/**
+ * Add back the container background-color, border-radius, padding, margin
+ * and overflow that we removed from <pre>.
+ */
+.gatsby-highlight {
+  background-color: #fdf6e3;
+  border-radius: 0.3em;
+  margin: 0.5em 0;
+  padding: 1em;
+  overflow: auto;
+}
+
+/**
+ * Remove the default PrismJS theme background-color, border-radius, margin,
+ * padding and overflow.
+ * 1. Make the element just wide enough to fit its content.
+ * 2. Always fill the visible space in .gatsby-highlight.
+ * 3. Adjust the position of the line numbers
+ */
+.gatsby-highlight pre[class*="language-"] {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  overflow: initial;
+  float: left; /* 1 */
+  min-width: 100%; /* 2 */
+}
+
+@media (min-width: 675px) {
+  header .container-flex {
+    flex-direction: row;
+  }
+
+  .nav-list-item {
+    margin-left: 2em;
+  }
+
+  .article-latest {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .article-image {
+    display: block;
+    order: -1;
+    width: 20%;
+  }
+
+  .article-body {
+    width: 75%;
+  }
+
+  .about {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .about-image {
+    width: 20%;
+  }
+
+  .about-body {
+    width: 75%;
+  }
+}

@@ -13,26 +13,26 @@ Recently, I switched from oh-my-zsh to a [fish shell](https://fishshell.com/), a
 But when I tried to install nvm (Node Version Manager) I had a problem, the shell didn’t recognize the nvm command. After some investigation, I found the solution.
 First, you need to install a [fisher](https://github.com/jorgebucaran/fisher). Fisher is a package manager for the fish shell. Download fisher.fish to your functions directory or any directory on your function path.
 
-```Bash
+```bash
 curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
 ```
 
 Your shell can take a few seconds before loading newly added functions. If the fisher command is not immediately available, launch a new session or replace the running shell with a new one.
 After installing the fisher, you need to add the [Bass](https://github.com/edc/bass) package. Bass makes it easy-to-use utilities written for Bash in a fish shell. Using fisher:
 
-```Bash
+```bash
 fisher add edc/bass
 ```
 
 Create a new fish file for nvm:
 
-```Bash
+```bash
 touch ~/.config/fish/functions/nvm.fish
 ```
 
 And add fish function to it to load nvm:
 
-```Bash
+```bash
 function nvm
     bass source ~/.nvm/nvm.sh -- no-use ‘;’ nvm $argv
 end
@@ -44,20 +44,20 @@ And you are ready-to-use NVM.
 
 If you want to download, compile, and install the latest release of node you just need to do this:
 
-```Bash
+```bash
 nvm install node # “node” is an alias for the latest version
 ```
 
 To install a specific version of node:
 
-```Bash
+```bash
 nvm install 10.10.0 # or 8.9.1, etc.
 ```
 
 Important to know is that the first version installed becomes the default. New shells start with the default version of node.
 To set a default Node version in any new shell, use the alias ‘default’:
 
-```Bash
+```bash
 nvm alias default [version of node] # e.g.
 nvm alias default 12.13.1
 ```

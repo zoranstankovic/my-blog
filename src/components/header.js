@@ -2,29 +2,46 @@ import React from "react";
 import { Link } from "gatsby";
 
 const Header = () => (
-  <section className="section is-paddingless">
-    <div className="container grid">
-      <nav className="navbar" role="navigation" aria-label="main navigation">
-        <div className="container">
-          <div className="navbar-brand">
-            <Link className="navbar-item" to="/">
-              <div className="title">Zoran Stankovic</div>
+  <header>
+    <div className="container container-flex">
+      <div className="site-title">
+        <Link className="site-title-link" to="/">
+          Zoran Stankovic
+        </Link>
+      </div>
+      <nav>
+        <ul className="nav-list">
+          <li className="nav-list-item">
+            <Link
+              className="nav-item-link"
+              to="/"
+              activeClassName="current-page"
+            >
+              home
             </Link>
-          </div>
-          <div className="navbar-menu">
-            <div className="navbar-start">
-              <Link className="navbar-item" to="/">
-                Home
-              </Link>
-              <Link className="navbar-item" to="/about/">
-                About
-              </Link>
-            </div>
-          </div>
-        </div>
+          </li>
+          <li className="nav-list-item">
+            <Link
+              className="nav-item-link"
+              to="/articles/"
+              activeClassName="current-page"
+            >
+              articles
+            </Link>
+          </li>
+          <li className="nav-list-item">
+            <Link
+              className="nav-item-link"
+              to="/about/"
+              activeClassName="current-page"
+            >
+              about
+            </Link>
+          </li>
+        </ul>
       </nav>
     </div>
-  </section>
+  </header>
 );
 
 export default Header;
