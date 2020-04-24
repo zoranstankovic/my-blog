@@ -1,7 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 
 const usePosts = props => {
-  console.log(props);
   const data = useStaticQuery(graphql`
     {
       allMdx(sort: { fields: frontmatter___date, order: DESC }) {

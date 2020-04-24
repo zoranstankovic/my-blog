@@ -15,7 +15,6 @@ const About = () => {
       }
     }
   `);
-  console.log(image);
   return (
     <Layout>
       <div className="container container-flex">
