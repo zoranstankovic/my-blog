@@ -10,7 +10,7 @@ export default () => (
 );
 
 const LatestArticles = ({ data }) => {
-  const { nodes: articles } = data.allMdx;
+  const { edges: articles } = data.allNotionPageBlog;
   return (
     <React.Fragment>
       <div className="latest-post-header">
@@ -20,7 +20,7 @@ const LatestArticles = ({ data }) => {
         </Link>
       </div>
       {articles.map(item => (
-        <PostPreview key={item.frontmatter.slug} post={item} />
+        <PostPreview key={item.node.slug} post={item} />
       ))}
     </React.Fragment>
   );
@@ -28,23 +28,19 @@ const LatestArticles = ({ data }) => {
 
 export const latestArticlesQuery = graphql`
   query latestArticles {
-    allMdx(sort: { fields: frontmatter___date, order: DESC }, limit: 3) {
-      nodes {
-        frontmatter {
+    allNotionPageBlog(
+      filter: { isDraft: { eq: false } }
+      sort: { fields: [indexPage], order: DESC }
+      limit: 3
+    ) {
+      edges {
+        node {
           title
-          author
           slug
-          date(formatString: "MMMM Do, YYYY")
-          image {
-            sharp: childImageSharp {
-              fluid(maxWidth: 150, maxHeight: 150) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
+          excerpt
+          pageIcon
+          createdAt(formatString: "MMM Do, YYYY")
         }
-        excerpt
-        timeToRead
       }
     }
   }

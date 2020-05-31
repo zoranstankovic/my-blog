@@ -1,11 +1,13 @@
-exports.createPages = async ({ actions, graphql, reporter }) => {
+exports.createPages = async ({ actions, graphql, reporter }, options) => {
+  const { createPage } = actions;
+  const pageTemplate = require.resolve("./src/templates/post.js");
   const result = await graphql(`
     {
-      allMdx {
-        nodes {
-          frontmatter {
+      allNotionPageBlog {
+        edges {
+          node {
+            pageId
             slug
-            publish
           }
         }
       }
@@ -14,18 +16,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   if (result.errors) {
     reporter.panic("failed to create posts", result.errors);
+    return;
   }
 
-  const posts = result.data.allMdx.nodes.filter(
-    post => post.frontmatter.publish !== false
-  );
-
-  posts.forEach(post => {
-    actions.createPage({
-      path: post.frontmatter.slug,
-      component: require.resolve("./src/templates/post.js"),
+  result.data.allNotionPageBlog.edges.forEach(({ node }) => {
+    createPage({
+      path: `${node.slug}`,
+      component: pageTemplate,
       context: {
-        slug: post.frontmatter.slug,
+        pathSlug: `${node.slug}`,
+        pageId: node.pageId,
       },
     });
   });

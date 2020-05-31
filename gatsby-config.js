@@ -10,6 +10,7 @@ module.exports = {
     title: "Zoran Stankovic",
     description:
       "A personal blog about programming, book reviews, and much more!",
+    basePath: "/",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -77,6 +78,22 @@ module.exports = {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID || "none",
+      },
+    },
+    {
+      resolve: "gatsby-source-notionso",
+      options: {
+        name: "Blog",
+        rootPageUrl:
+          "https://www.notion.so/my-blog-3da5b45a40a243e9a7c9eb96c6f79533",
+        debug: false,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pages`,
+        path: `${__dirname}/src/pages`,
       },
     },
   ],

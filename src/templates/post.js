@@ -3,33 +3,63 @@ import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import Layout from "../components/layout";
 import { Link } from "gatsby";
+import notionRendererFactory from "gatsby-source-notionso/lib/renderer";
+import NotionBlockRenderer from "../components/notion-block-renderer";
+
+const PostTemplate = ({ data, pageContext }) => {
+  const notionRenderer = notionRendererFactory({
+    notionPage: data.notionPageBlog,
+  });
+  return (
+    <Layout>
+      <div className="container container-flex">
+        <h1>{data.notionPageBlog.title}</h1>
+        <p className="article-info">
+          <time>{data.notionPageBlog.createdAt}</time> &middot; post.timeToRead
+          min read &middot; posted by post.frontmatter.author
+        </p>
+        <NotionBlockRenderer
+          data={data}
+          renderer={notionRenderer}
+          debug={true}
+        />
+        <Link to="/articles/">&larr; Back to all articles</Link>
+      </div>
+    </Layout>
+  );
+};
 
 export const query = graphql`
-  query($slug: String!) {
-    mdx(frontmatter: { slug: { eq: $slug } }) {
-      frontmatter {
-        title
-        author
-        date(formatString: "MMMM Do, YYYY")
+  query($pageId: String!) {
+    notionPageBlog(pageId: { eq: $pageId }) {
+      blocks {
+        blockId
+        blockIds
+        type
+        attributes {
+          att
+          value
+        }
+        properties {
+          propName
+          value {
+            text
+            atts {
+              att
+              value
+            }
+          }
+        }
       }
-      body
-      timeToRead
+      pageId
+      slug
+      title
+      isDraft
+      id
+      indexPage
+      createdAt(formatString: "MMM Do, YYYY")
     }
   }
 `;
-
-const PostTemplate = ({ data: { mdx: post } }) => (
-  <Layout>
-    <div className="container container-flex">
-      <h1>{post.frontmatter.title}</h1>
-      <p className="article-info">
-        <time>{post.frontmatter.date}</time> &middot; {post.timeToRead} min read
-        &middot; posted by {post.frontmatter.author}
-      </p>
-      <MDXRenderer>{post.body}</MDXRenderer>
-      <Link to="/articles/">&larr; Back to all articles</Link>
-    </div>
-  </Layout>
-);
 
 export default PostTemplate;
