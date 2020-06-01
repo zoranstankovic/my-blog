@@ -3,29 +3,26 @@ import { graphql, useStaticQuery } from "gatsby";
 const usePosts = props => {
   const data = useStaticQuery(graphql`
     {
-      allMdx(sort: { fields: frontmatter___date, order: DESC }) {
+      allPosts(
+        filter: { status: { eq: "published" } }
+        sort: { fields: [publish_date], order: DESC }
+      ) {
         nodes {
-          frontmatter {
-            title
-            author
-            slug
-            date(formatString: "MMMM Do, YYYY")
-            image {
-              sharp: childImageSharp {
-                fluid(maxWidth: 150, maxHeight: 150) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-          }
-          excerpt
-          timeToRead
+          title
+          tags
+          desc
+          status
+          url
+          read_time
+          cover_image
+          slug
+          publish_date(formatString: "MMMM Do, YYYY")
         }
       }
     }
   `);
 
-  return data.allMdx.nodes;
+  return data.allPosts.nodes;
 };
 
 export default usePosts;

@@ -10,7 +10,7 @@ export default () => (
 );
 
 const LatestArticles = ({ data }) => {
-  const { nodes: articles } = data.allMdx;
+  const { nodes: articles } = data.allPosts;
   return (
     <React.Fragment>
       <div className="latest-post-header">
@@ -20,7 +20,7 @@ const LatestArticles = ({ data }) => {
         </Link>
       </div>
       {articles.map(item => (
-        <PostPreview key={item.frontmatter.slug} post={item} />
+        <PostPreview key={item.slug} post={item} />
       ))}
     </React.Fragment>
   );
@@ -28,23 +28,21 @@ const LatestArticles = ({ data }) => {
 
 export const latestArticlesQuery = graphql`
   query latestArticles {
-    allMdx(sort: { fields: frontmatter___date, order: DESC }, limit: 3) {
+    allPosts(
+      filter: { status: { eq: "published" } }
+      sort: { fields: [publish_date], order: DESC }
+      limit: 3
+    ) {
       nodes {
-        frontmatter {
-          title
-          author
-          slug
-          date(formatString: "MMMM Do, YYYY")
-          image {
-            sharp: childImageSharp {
-              fluid(maxWidth: 150, maxHeight: 150) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-        excerpt
-        timeToRead
+        title
+        tags
+        desc
+        status
+        url
+        read_time
+        cover_image
+        slug
+        publish_date(formatString: "MMMM Do, YYYY")
       }
     }
   }

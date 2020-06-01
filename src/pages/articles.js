@@ -11,7 +11,7 @@ const Artciles = () => {
         <main>
           <h1>Articles</h1>
           {posts.map(item => (
-            <PostPreview key={item.frontmatter.slug} post={item} />
+            <PostPreview key={item.slug} post={item} />
           ))}
         </main>
       </div>

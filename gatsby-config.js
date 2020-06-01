@@ -79,5 +79,18 @@ module.exports = {
         trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID || "none",
       },
     },
+    {
+      resolve: `gatsby-source-notion-database`,
+      options: {
+        sourceConfig: [
+          {
+            name: "posts",
+            table:
+              "https://www.notion.so/3da5b45a40a243e9a7c9eb96c6f79533?v=d8fbb7487d654e31b906d494e88e3860",
+            cacheType: "html",
+          },
+        ],
+      },
+    },
   ],
 };

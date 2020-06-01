@@ -3,24 +3,25 @@ import { Link } from "gatsby";
 import Image from "gatsby-image";
 
 const PostPreview = ({ post }) => {
-  const { slug, title, date, image } = post.frontmatter;
+  const { slug, title, image, url, read_time, publish_date, desc } = post;
   return (
     <article className="article-latest">
       <div className="article-body">
-        <Link to={slug} className="article-title">
+        <Link to={url} className="article-title">
           {title}
         </Link>
         <p className="article-info">
-          <time>{date}</time> &middot; {post.timeToRead} min read
+          <time>{publish_date}</time> &middot; {read_time} min read
         </p>
-        <p className="article-text">{post.excerpt}</p>
-        <Link to={slug} className="article-read-more">
+        <p
+          className="article-text"
+          dangerouslySetInnerHTML={{ __html: desc }}
+        ></p>
+        <Link to={url} className="article-read-more">
           Read more ...
         </Link>
       </div>
-      <div className="article-image">
-        <Image fluid={image.sharp.fluid} alt={title} />
-      </div>
+      <div className="article-image"></div>
     </article>
   );
 };

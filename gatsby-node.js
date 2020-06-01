@@ -1,12 +1,10 @@
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const result = await graphql(`
     {
-      allMdx {
+      allPosts(filter: { status: { eq: "published" } }) {
         nodes {
-          frontmatter {
-            slug
-            publish
-          }
+          slug
+          url
         }
       }
     }
@@ -16,16 +14,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panic("failed to create posts", result.errors);
   }
 
-  const posts = result.data.allMdx.nodes.filter(
-    post => post.frontmatter.publish !== false
-  );
-
-  posts.forEach(post => {
+  result.data.allPosts.nodes.forEach(({ slug, url }) => {
     actions.createPage({
-      path: post.frontmatter.slug,
+      path: url,
       component: require.resolve("./src/templates/post.js"),
       context: {
-        slug: post.frontmatter.slug,
+        slug: slug,
       },
     });
   });
